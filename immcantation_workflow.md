@@ -4,9 +4,14 @@
 
 1. Run docker image (and save the results in my computer):
 
-	docker run --network=host --rm -v /home/bmrc/Public/phil_ubuntu/sc/airr/immcantation/outs/outs_wt:/home/phil_docker:z immcantation/suite:4.1.0 bash
+	docker run --network=host --rm -v /home/bmrc/Public/phil_ubuntu/sc/airr/
+  immcantation/outs/outs_wt:/home/phil_docker:z immcantation/suite:4.1.0 bash
 
 2. Use changeo-10x script supplied in the Docker container. 
+
+note: changeo-10x runs IgBLAST (what about imgt ??), converts to change-o tsv format, 
+AssignGenes, ParseDb select, correct clonal groups, add germline sequences to the db. 
+Basically, runs changeo-clone and -igblast.
 
 	changeo-10x -s filtered_contig.fasta -a filtered_contig_annotations.csv -o . -g mouse -t ig -x 0.16
 
@@ -23,6 +28,9 @@ drwxrwxrwx 2 root  root       4096 Dec 11 02:29 logs
 -rw-rw-rw- 1 root  root   29442971 Dec 11 02:27 filtered_contig_db-pass.tsv
 -rw-rw-rw- 1 root  root   63721064 Dec 11 02:26 filtered_contig_igblast.fmt7
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+##### Alternatively, run changeo-10x manually as follows: #####
 
 3. Define clonal groups manually
 
@@ -61,6 +69,9 @@ RECORDS> 4389
    FAIL> 3
     END> CreateGermlines
 
+
+##### End the alternative method here. #####
+
 4. Build lineage trees using IgPhyML in Alakazam CRAN package. 
 
 # building maximum likelihood trees of B cell-specific data
@@ -68,7 +79,7 @@ RECORDS> 4389
 	BuildTrees.py -d filtered_contig_heavy_germ-pass.tsv --minseq 2 --clean all \
     --igphyml --collapse --nproc 16 --asr 0.9
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    START> BuildTrees
     FILE> filtered_contig_heavy_germ-pass.tsv
 COLLAPSE> True
@@ -118,7 +129,7 @@ SCOPE> all
 
 END> IgPhyML analysis
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 # Open R to load libraries.
 
@@ -139,8 +150,19 @@ output file: graph.png
 
 5. Read 
 
-Merge Cell Ranger annotations -> Parsing 10X Genomics V(D)J data
+Merge Cell Ranger annotations -> Parsing 10X Genomics V(D)J data [DONE]
 
 ### The end of assigning VDJ genes and defining clonal groups.
 
-6. Move on to other pipelines. 
+6. Move on to other pipelines.
+
+	After 3. or changeo-10x, I can vew the final germ-pass.tab (change-o) or tsv (airr) file. 
+
+	Use alakazam for clonal abundance and diversity, lineage construction.
+
+	Use shazam-threshold.r :
+
+		basically, I can make figures for mutational load, SHM targeting biases, quantification.
+
+	Use tigger-genotype.r for polymorphism detection and genotyping. 
+
