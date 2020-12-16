@@ -6,6 +6,10 @@
 
 	docker run --network=host -it --rm -v /home/bmrc/Public/phil_ubuntu/sc/airr/immcantation/outs/outs_wt:/home/phil_docker:z immcantation/suite:4.1.0 bash
 
+  docker start CONTAINER ID
+
+  docker exec -it CONTAINER ID bash
+
 2. Use changeo-10x script supplied in the Docker container. 
 
 note: changeo-10x runs IgBLAST (what about imgt ??), converts to change-o tsv format, 
@@ -14,7 +18,7 @@ Basically, runs changeo-clone and -igblast.
 
 	changeo-10x -s filtered_contig.fasta -a filtered_contig_annotations.csv -o . -g mouse -t ig -x 0.16
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 output files:
 
 -rw-rw-rw- 1 root  root    9406322 Dec 11 02:29 temp_files.tar.gz
@@ -26,10 +30,48 @@ drwxrwxrwx 2 root  root       4096 Dec 11 02:29 logs
 -rw-rw-rw- 1 root  root    2753250 Dec 11 02:27 filtered_contig_heavy_productive-F.tsv
 -rw-rw-rw- 1 root  root   29442971 Dec 11 02:27 filtered_contig_db-pass.tsv
 -rw-rw-rw- 1 root  root   63721064 Dec 11 02:26 filtered_contig_igblast.fmt7
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 ##### Alternatively, run changeo-10x manually as follows: #####
+
+%%%%%%%% Re-do from <Parsing 10X Genomics V(D)J data> %%%%%%%%%
+
+
+AssignGenes.py igblast -s /home/phil_docker/filtered_contig.fasta -b /usr/local/share/igblast --organism mouse --loci ig --format blast
+
+MakeDb.py igblast -i /home/phil_docker/filtered_contig_igblast.fmt7 -s /home/phil_docker/filtered_contig.fasta -r /usr/local/share/germlines/imgt/mouse/vdj --10x /home/phil_docker/filtered_contig_annotations.csv --extended
+
+ParseDb.py select -d filtered_contig_igblast_db-pass.tsv -f locus -u "IGH" --logic all --regex --outname heavy
+
+ParseDb.py select -d filtered_contig_igblast_db-pass.tsv -f locus -u "IG[LK]" --logic all --regex --outname light
+
+DefineClones.py -d heavy_parse-select.tsv --act set --model ham --norm len --dist 0.16
+
+light_cluster.py -d heavy_parse-select_clone-pass.tsv -e light_parse-select.tsv -o 10x_clone-pass.tsv
+
+  # Filtering records
+
+  ParseDb.py select -d 10x_clone-pass.tsv -f productive -u T
+  # or ParseDb.py split -d 10x_clone-pass.tsv -f productive -u T
+
+  # Exporting records to FASTA
+
+  ConvertDb.py fasta -d 10x_clone-pass.tsv --if sequence_id \
+    --sf sequence_alignment --mf v_call duplicate_count
+
+  # Reconstructing germline sequences
+
+  CreateGermlines.py -d 10x_clone-pass_parse-select.tsv -g dmask --cloned \
+        -r /usr/local/share/germlines/imgt/mouse/vdj/imgt_mouse_IGHV.fasta \
+    /usr/local/share/germlines/imgt/mouse/vdj/imgt_mouse_IGHD.fasta \
+    /usr/local/share/germlines/imgt/mouse/vdj/imgt_mouse_IGHJ.fasta \
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 
 3. Define clonal groups manually
 
@@ -75,10 +117,10 @@ RECORDS> 4389
 
 # building maximum likelihood trees of B cell-specific data
 
-	BuildTrees.py -d filtered_contig_heavy_germ-pass.tsv --minseq 2 --clean all \
+	BuildTrees.py -d 10x_clone-pass_parse-select_germ-pass.tsv --minseq 2 --clean all \
     --igphyml --collapse --nproc 16 --asr 0.9
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    START> BuildTrees
     FILE> filtered_contig_heavy_germ-pass.tsv
 COLLAPSE> True
@@ -128,7 +170,7 @@ SCOPE> all
 
 END> IgPhyML analysis
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 # Open R to load libraries.
 
