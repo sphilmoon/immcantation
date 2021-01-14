@@ -1,0 +1,4 @@
+library_id,vdj_contig_info,donor,origin,status
+Lib1,/home/bmrc/Public/phil_ubuntu/sc/airr/immcantation/outs/output_wt/wt/vdj_contig_info.pb,D1,t0,naive
+Lib2,/home/bmrc/Public/phil_ubuntu/sc/airr/immcantation/outs/output_vac/outs/vdj_contig_info.pb,D1,t1,vaccinated
+Lib3,/home/bmrc/Public/phil_ubuntu/sc/airr/immcantation/outs/output_a/outs/vdj_contig_info.pb,D1,t1_a,protected_14dpi
