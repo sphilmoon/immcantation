@@ -1,0 +1,12 @@
+# installing R in jupyter notebook using conda
+
+conda create -n r-kernel
+conda activate r-kernel
+
+conda install r-recommended r-irkernel
+
+R -e 'IRkernel::installspec()'
+
+jupyter-notebook
+
+# from https://izoda.github.io/site/anaconda/r-jupyter-notebook/
