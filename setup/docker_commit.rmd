@@ -1,0 +1,14 @@
+### Creating a new docker image with push
+
+    # First, create repository at your docker hub website ###
+1. sudo docker login 
+2. docker tag <existing image ID> sphilmoon/<repository name>:tag
+3. docker push sphilmoon/<repository name>:tag
+
+
+### Pushing the modified images on docker hub
+
+1. docker ps -a
+2. docker commit <container ID> <new image name>
+3. docker images
+4. docker push sphilmoon/<repository name>:new_tag
