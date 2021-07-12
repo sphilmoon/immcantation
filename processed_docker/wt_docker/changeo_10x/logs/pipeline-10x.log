@@ -1,0 +1,135 @@
+
+   START> AssignGenes
+ COMMAND> igblast
+ VERSION> 1.17.0
+    FILE> filtered_contig.fasta
+ORGANISM> mouse
+    LOCI> ig
+   NPROC> 32
+
+PROGRESS> 00:14:34 |Running IgBLAST          | 0.0 minPROGRESS> 00:14:54 |Done                     | 0.3 min
+
+OUTPUT> filtered_contig_igblast.fmt7
+   END> AssignGenes
+
+       START> MakeDB
+     COMMAND> igblast
+ALIGNER_FILE> filtered_contig_igblast.fmt7
+    SEQ_FILE> filtered_contig.fasta
+     ASIS_ID> False
+  ASIS_CALLS> False
+     PARTIAL> False
+    EXTENDED> True
+
+PROGRESS> 00:14:55 |Loading files       | 0.0 minPROGRESS> 00:14:55 |Done                | 0.0 min
+
+PROGRESS> 00:14:55 |                    |   0% (     0) 0.0 minPROGRESS> 00:15:00 |#                   |   5% (   542) 0.1 minPROGRESS> 00:15:01 |##                  |  10% ( 1,084) 0.1 minPROGRESS> 00:15:01 |###                 |  15% ( 1,626) 0.1 minPROGRESS> 00:15:02 |####                |  20% ( 2,168) 0.1 minPROGRESS> 00:15:02 |#####               |  25% ( 2,710) 0.1 minPROGRESS> 00:15:02 |######              |  30% ( 3,252) 0.1 minPROGRESS> 00:15:03 |#######             |  35% ( 3,794) 0.1 minPROGRESS> 00:15:03 |########            |  40% ( 4,336) 0.1 minPROGRESS> 00:15:03 |#########           |  45% ( 4,878) 0.1 minPROGRESS> 00:15:04 |##########          |  50% ( 5,420) 0.1 minPROGRESS> 00:15:04 |###########         |  55% ( 5,962) 0.2 minPROGRESS> 00:15:05 |############        |  60% ( 6,504) 0.2 minPROGRESS> 00:15:05 |#############       |  65% ( 7,046) 0.2 minPROGRESS> 00:15:05 |##############      |  70% ( 7,588) 0.2 minPROGRESS> 00:15:06 |###############     |  75% ( 8,130) 0.2 minPROGRESS> 00:15:06 |################    |  80% ( 8,672) 0.2 minPROGRESS> 00:15:07 |#################   |  85% ( 9,214) 0.2 minPROGRESS> 00:15:07 |##################  |  90% ( 9,756) 0.2 minPROGRESS> 00:15:07 |################### |  95% (10,298) 0.2 minPROGRESS> 00:15:08 |####################| 100% (10,831) 0.2 min
+
+OUTPUT> filtered_contig_db-pass.tsv
+  PASS> 10824
+  FAIL> 7
+   END> MakeDb
+
+  START> ParseDb
+COMMAND> select
+   FILE> filtered_contig_db-pass.tsv
+ FIELDS> locus
+ VALUES> IGH,TRB,TRD
+  REGEX> False
+
+PROGRESS> 00:15:08 |                    |   0% (     0) 0.0 minPROGRESS> 00:15:08 |#                   |   5% (   542) 0.0 minPROGRESS> 00:15:08 |##                  |  10% ( 1,084) 0.0 minPROGRESS> 00:15:08 |###                 |  15% ( 1,626) 0.0 minPROGRESS> 00:15:08 |####                |  20% ( 2,168) 0.0 minPROGRESS> 00:15:08 |#####               |  25% ( 2,710) 0.0 minPROGRESS> 00:15:08 |######              |  30% ( 3,252) 0.0 minPROGRESS> 00:15:08 |#######             |  35% ( 3,794) 0.0 minPROGRESS> 00:15:08 |########            |  40% ( 4,336) 0.0 minPROGRESS> 00:15:08 |#########           |  45% ( 4,878) 0.0 minPROGRESS> 00:15:08 |##########          |  50% ( 5,420) 0.0 minPROGRESS> 00:15:08 |###########         |  55% ( 5,962) 0.0 minPROGRESS> 00:15:08 |############        |  60% ( 6,504) 0.0 minPROGRESS> 00:15:08 |#############       |  65% ( 7,046) 0.0 minPROGRESS> 00:15:08 |##############      |  70% ( 7,588) 0.0 minPROGRESS> 00:15:08 |###############     |  75% ( 8,130) 0.0 minPROGRESS> 00:15:08 |################    |  80% ( 8,672) 0.0 minPROGRESS> 00:15:09 |#################   |  85% ( 9,214) 0.0 minPROGRESS> 00:15:09 |##################  |  90% ( 9,756) 0.0 minPROGRESS> 00:15:09 |################### |  95% (10,298) 0.0 minPROGRESS> 00:15:09 |####################| 100% (10,824) 0.0 min
+
+   OUTPUT> filtered_contig_heavy.tsv
+  RECORDS> 10824
+ SELECTED> 4738
+DISCARDED> 6086
+      END> ParseDb
+
+  START> ParseDb
+COMMAND> select
+   FILE> filtered_contig_db-pass.tsv
+ FIELDS> locus
+ VALUES> IGK,IGL,TRA,TRG
+  REGEX> False
+
+PROGRESS> 00:15:09 |                    |   0% (     0) 0.0 minPROGRESS> 00:15:09 |#                   |   5% (   542) 0.0 minPROGRESS> 00:15:09 |##                  |  10% ( 1,084) 0.0 minPROGRESS> 00:15:09 |###                 |  15% ( 1,626) 0.0 minPROGRESS> 00:15:09 |####                |  20% ( 2,168) 0.0 minPROGRESS> 00:15:09 |#####               |  25% ( 2,710) 0.0 minPROGRESS> 00:15:09 |######              |  30% ( 3,252) 0.0 minPROGRESS> 00:15:09 |#######             |  35% ( 3,794) 0.0 minPROGRESS> 00:15:09 |########            |  40% ( 4,336) 0.0 minPROGRESS> 00:15:09 |#########           |  45% ( 4,878) 0.0 minPROGRESS> 00:15:09 |##########          |  50% ( 5,420) 0.0 minPROGRESS> 00:15:09 |###########         |  55% ( 5,962) 0.0 minPROGRESS> 00:15:09 |############        |  60% ( 6,504) 0.0 minPROGRESS> 00:15:09 |#############       |  65% ( 7,046) 0.0 minPROGRESS> 00:15:09 |##############      |  70% ( 7,588) 0.0 minPROGRESS> 00:15:09 |###############     |  75% ( 8,130) 0.0 minPROGRESS> 00:15:09 |################    |  80% ( 8,672) 0.0 minPROGRESS> 00:15:09 |#################   |  85% ( 9,214) 0.0 minPROGRESS> 00:15:09 |##################  |  90% ( 9,756) 0.0 minPROGRESS> 00:15:09 |################### |  95% (10,298) 0.0 minPROGRESS> 00:15:09 |####################| 100% (10,824) 0.0 min
+
+   OUTPUT> filtered_contig_light.tsv
+  RECORDS> 10824
+ SELECTED> 6086
+DISCARDED> 4738
+      END> ParseDb
+
+    START> ParseDb
+  COMMAND> split
+     FILE> filtered_contig_heavy.tsv
+    FIELD> productive
+NUM_SPLIT> None
+
+PROGRESS> 00:15:10 |                    |   0% (    0) 0.0 minPROGRESS> 00:15:10 |#                   |   5% (  237) 0.0 minPROGRESS> 00:15:10 |##                  |  10% (  474) 0.0 minPROGRESS> 00:15:10 |###                 |  15% (  711) 0.0 minPROGRESS> 00:15:10 |####                |  20% (  948) 0.0 minPROGRESS> 00:15:10 |#####               |  25% (1,185) 0.0 minPROGRESS> 00:15:10 |######              |  30% (1,422) 0.0 minPROGRESS> 00:15:10 |#######             |  35% (1,659) 0.0 minPROGRESS> 00:15:10 |########            |  40% (1,896) 0.0 minPROGRESS> 00:15:10 |#########           |  45% (2,133) 0.0 minPROGRESS> 00:15:10 |##########          |  50% (2,370) 0.0 minPROGRESS> 00:15:10 |###########         |  55% (2,607) 0.0 minPROGRESS> 00:15:10 |############        |  60% (2,844) 0.0 minPROGRESS> 00:15:10 |#############       |  65% (3,081) 0.0 minPROGRESS> 00:15:10 |##############      |  70% (3,318) 0.0 minPROGRESS> 00:15:10 |###############     |  75% (3,555) 0.0 minPROGRESS> 00:15:10 |################    |  80% (3,792) 0.0 minPROGRESS> 00:15:10 |#################   |  85% (4,029) 0.0 minPROGRESS> 00:15:10 |##################  |  90% (4,266) 0.0 minPROGRESS> 00:15:10 |################### |  95% (4,503) 0.0 minPROGRESS> 00:15:10 |####################| 100% (4,738) 0.0 min
+
+OUTPUT1> filtered_contig_heavy_productive-T.tsv
+RECORDS> 4738
+  PARTS> 1
+    END> ParseDb
+
+    START> ParseDb
+  COMMAND> split
+     FILE> filtered_contig_light.tsv
+    FIELD> productive
+NUM_SPLIT> None
+
+PROGRESS> 00:15:11 |                    |   0% (    0) 0.0 minPROGRESS> 00:15:11 |#                   |   5% (  305) 0.0 minPROGRESS> 00:15:11 |##                  |  10% (  610) 0.0 minPROGRESS> 00:15:11 |###                 |  15% (  915) 0.0 minPROGRESS> 00:15:11 |####                |  20% (1,220) 0.0 minPROGRESS> 00:15:11 |#####               |  25% (1,525) 0.0 minPROGRESS> 00:15:11 |######              |  30% (1,830) 0.0 minPROGRESS> 00:15:11 |#######             |  35% (2,135) 0.0 minPROGRESS> 00:15:11 |########            |  40% (2,440) 0.0 minPROGRESS> 00:15:11 |#########           |  45% (2,745) 0.0 minPROGRESS> 00:15:11 |##########          |  50% (3,050) 0.0 minPROGRESS> 00:15:11 |###########         |  55% (3,355) 0.0 minPROGRESS> 00:15:11 |############        |  60% (3,660) 0.0 minPROGRESS> 00:15:11 |#############       |  65% (3,965) 0.0 minPROGRESS> 00:15:11 |##############      |  70% (4,270) 0.0 minPROGRESS> 00:15:11 |###############     |  75% (4,575) 0.0 minPROGRESS> 00:15:11 |################    |  80% (4,880) 0.0 minPROGRESS> 00:15:11 |#################   |  85% (5,185) 0.0 minPROGRESS> 00:15:11 |##################  |  90% (5,490) 0.0 minPROGRESS> 00:15:11 |################### |  95% (5,795) 0.0 minPROGRESS> 00:15:11 |####################| 100% (6,086) 0.0 min
+
+OUTPUT1> filtered_contig_light_productive-T.tsv
+RECORDS> 6086
+  PARTS> 1
+    END> ParseDb
+
+       START> DefineClones
+        FILE> filtered_contig_heavy_productive-T.tsv
+   SEQ_FIELD> junction
+     V_FIELD> v_call
+     J_FIELD> j_call
+ MAX_MISSING> 0
+GROUP_FIELDS> None
+      ACTION> set
+        MODE> gene
+    DISTANCE> 0.1
+     LINKAGE> single
+       MODEL> ham
+        NORM> len
+         SYM> avg
+       NPROC> 32
+
+PROGRESS> [Grouping sequences] 00:16:23 (0) 0.0 minPROGRESS> [Grouping sequences] 00:16:23 (1000) 0.0 minPROGRESS> [Grouping sequences] 00:16:23 (2000) 0.0 minPROGRESS> [Grouping sequences] 00:16:24 (3000) 0.0 minPROGRESS> [Grouping sequences] 00:16:24 (4000) 0.0 minPROGRESS> [Grouping sequences] 00:16:25 (4738) 0.0 min
+
+PROGRESS> [Assigning clones] 00:16:25 |                    |   0% (    0) 0.0 minPROGRESS> [Assigning clones] 00:16:25 |##                  |  10% (  474) 0.0 minPROGRESS> [Assigning clones] 00:16:25 |######              |  30% (1,422) 0.0 minPROGRESS> [Assigning clones] 00:16:25 |#######             |  35% (1,659) 0.0 minPROGRESS> [Assigning clones] 00:16:26 |##########          |  50% (2,370) 0.0 minPROGRESS> [Assigning clones] 00:16:26 |############        |  60% (2,844) 0.1 minPROGRESS> [Assigning clones] 00:16:26 |#############       |  65% (3,081) 0.1 minPROGRESS> [Assigning clones] 00:16:26 |##############      |  70% (3,318) 0.1 minPROGRESS> [Assigning clones] 00:16:26 |###############     |  75% (3,555) 0.1 minPROGRESS> [Assigning clones] 00:16:26 |################    |  80% (3,792) 0.1 minPROGRESS> [Assigning clones] 00:16:27 |##################  |  90% (4,266) 0.1 minPROGRESS> [Assigning clones] 00:16:27 |####################| 100% (4,738) 0.1 min
+
+ OUTPUT> filtered_contig_heavy_clone-pass.tsv
+ CLONES> 4624
+RECORDS> 4738
+   PASS> 4738
+   FAIL> 0
+    END> DefineClones
+
+      START> CreateGermlines
+       FILE> filtered_contig_heavy_clone-light.tsv
+ GERM_TYPES> full,dmask
+  SEQ_FIELD> sequence_alignment
+    V_FIELD> v_call
+    D_FIELD> d_call
+    J_FIELD> j_call
+     CLONED> True
+CLONE_FIELD> clone_id
+
+PROGRESS> 00:16:57 |Sorting by clone    | 0.0 minPROGRESS> 00:16:58 |Done                | 0.0 min
+
+PROGRESS> 00:16:58 |                    |   0% (    0) 0.0 minPROGRESS> 00:16:58 |#                   |   5% (  224) 0.0 minPROGRESS> 00:16:58 |##                  |  10% (  448) 0.0 minPROGRESS> 00:16:59 |###                 |  15% (  672) 0.0 minPROGRESS> 00:16:59 |####                |  20% (  896) 0.0 minPROGRESS> 00:16:59 |#####               |  25% (1,120) 0.0 minPROGRESS> 00:16:59 |######              |  30% (1,344) 0.0 minPROGRESS> 00:16:59 |#######             |  35% (1,568) 0.0 minPROGRESS> 00:16:59 |########            |  40% (1,792) 0.0 minPROGRESS> 00:16:59 |#########           |  45% (2,016) 0.0 minPROGRESS> 00:16:59 |##########          |  50% (2,240) 0.0 minPROGRESS> 00:16:59 |###########         |  55% (2,464) 0.0 minPROGRESS> 00:16:59 |############        |  60% (2,688) 0.0 minPROGRESS> 00:16:59 |#############       |  65% (2,912) 0.0 minPROGRESS> 00:16:59 |##############      |  70% (3,136) 0.0 minPROGRESS> 00:16:59 |###############     |  75% (3,360) 0.0 minPROGRESS> 00:16:59 |################    |  80% (3,584) 0.0 minPROGRESS> 00:17:00 |#################   |  85% (3,808) 0.0 minPROGRESS> 00:17:00 |##################  |  90% (4,032) 0.0 minPROGRESS> 00:17:00 |################### |  95% (4,256) 0.0 minPROGRESS> 00:17:00 |####################| 100% (4,476) 0.0 min
+
+ OUTPUT> filtered_contig_heavy_germ-pass.tsv
+RECORDS> 4476
+   PASS> 4474
+   FAIL> 2
+    END> CreateGermlines
+
