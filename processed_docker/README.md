@@ -1,0 +1,16 @@
+Processed output files from 10X Genomics "cellranger vdj" commands.  
+This is a description for samples.  
+
+# Sample info
+*'Mouse strain: C57BL6'
+*'Age: 8 - 10 wks old'
+*'Gender: F'
+*'Organs: Spleen'
+*'Sample preparation: Used a StemCellKit to enrich B cells to profile the VDJ gene segments of BCR.'  
+
+'''r
+1. wt: No injections. Just a naive mouse.  
+2. vac: immunization of three-times purified VSG1.1.  
+3. a: immunization of three-times purified VSG1.1 + challenge with AnTat1.1 trypanosomes at 14 dpi (protected).  
+4. r: immunization of three-times purified VSG1.1 + challenge with AnTaR trypanosomes at 14 dpi (Not protected).
+'''
