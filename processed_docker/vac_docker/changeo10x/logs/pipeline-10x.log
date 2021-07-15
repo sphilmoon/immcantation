@@ -1,135 +1,0 @@
-
-   START> AssignGenes
- COMMAND> igblast
- VERSION> 1.17.0
-    FILE> filtered_contig.fasta
-ORGANISM> mouse
-    LOCI> ig
-   NPROC> 16
-
-PROGRESS> 05:38:49 |Running IgBLAST          | 0.0 minPROGRESS> 05:39:05 |Done                     | 0.3 min
-
-OUTPUT> vac_igblast.fmt7
-   END> AssignGenes
-
-       START> MakeDB
-     COMMAND> igblast
-ALIGNER_FILE> vac_igblast.fmt7
-    SEQ_FILE> filtered_contig.fasta
-     ASIS_ID> False
-  ASIS_CALLS> False
-     PARTIAL> False
-    EXTENDED> True
-
-PROGRESS> 05:39:05 |Loading files       | 0.0 minPROGRESS> 05:39:05 |Done                | 0.0 min
-
-PROGRESS> 05:39:05 |                    |   0% (    0) 0.0 minPROGRESS> 05:39:11 |#                   |   5% (  357) 0.1 minPROGRESS> 05:39:11 |##                  |  10% (  714) 0.1 minPROGRESS> 05:39:12 |###                 |  15% (1,071) 0.1 minPROGRESS> 05:39:12 |####                |  20% (1,428) 0.1 minPROGRESS> 05:39:12 |#####               |  25% (1,785) 0.1 minPROGRESS> 05:39:12 |######              |  30% (2,142) 0.1 minPROGRESS> 05:39:13 |#######             |  35% (2,499) 0.1 minPROGRESS> 05:39:13 |########            |  40% (2,856) 0.1 minPROGRESS> 05:39:13 |#########           |  45% (3,213) 0.1 minPROGRESS> 05:39:13 |##########          |  50% (3,570) 0.1 minPROGRESS> 05:39:14 |###########         |  55% (3,927) 0.1 minPROGRESS> 05:39:14 |############        |  60% (4,284) 0.1 minPROGRESS> 05:39:14 |#############       |  65% (4,641) 0.1 minPROGRESS> 05:39:15 |##############      |  70% (4,998) 0.2 minPROGRESS> 05:39:15 |###############     |  75% (5,355) 0.2 minPROGRESS> 05:39:15 |################    |  80% (5,712) 0.2 minPROGRESS> 05:39:15 |#################   |  85% (6,069) 0.2 minPROGRESS> 05:39:16 |##################  |  90% (6,426) 0.2 minPROGRESS> 05:39:16 |################### |  95% (6,783) 0.2 minPROGRESS> 05:39:16 |####################| 100% (7,140) 0.2 min
-
-OUTPUT> vac_db-pass.tsv
-  PASS> 7138
-  FAIL> 2
-   END> MakeDb
-
-  START> ParseDb
-COMMAND> select
-   FILE> vac_db-pass.tsv
- FIELDS> locus
- VALUES> IGH,TRB,TRD
-  REGEX> False
-
-PROGRESS> 05:39:16 |                    |   0% (    0) 0.0 minPROGRESS> 05:39:16 |#                   |   5% (  357) 0.0 minPROGRESS> 05:39:17 |##                  |  10% (  714) 0.0 minPROGRESS> 05:39:17 |###                 |  15% (1,071) 0.0 minPROGRESS> 05:39:17 |####                |  20% (1,428) 0.0 minPROGRESS> 05:39:17 |#####               |  25% (1,785) 0.0 minPROGRESS> 05:39:17 |######              |  30% (2,142) 0.0 minPROGRESS> 05:39:17 |#######             |  35% (2,499) 0.0 minPROGRESS> 05:39:17 |########            |  40% (2,856) 0.0 minPROGRESS> 05:39:17 |#########           |  45% (3,213) 0.0 minPROGRESS> 05:39:17 |##########          |  50% (3,570) 0.0 minPROGRESS> 05:39:17 |###########         |  55% (3,927) 0.0 minPROGRESS> 05:39:17 |############        |  60% (4,284) 0.0 minPROGRESS> 05:39:17 |#############       |  65% (4,641) 0.0 minPROGRESS> 05:39:17 |##############      |  70% (4,998) 0.0 minPROGRESS> 05:39:17 |###############     |  75% (5,355) 0.0 minPROGRESS> 05:39:17 |################    |  80% (5,712) 0.0 minPROGRESS> 05:39:17 |#################   |  85% (6,069) 0.0 minPROGRESS> 05:39:17 |##################  |  90% (6,426) 0.0 minPROGRESS> 05:39:17 |################### |  95% (6,783) 0.0 minPROGRESS> 05:39:17 |####################| 100% (7,138) 0.0 min
-
-   OUTPUT> vac_heavy.tsv
-  RECORDS> 7138
- SELECTED> 3221
-DISCARDED> 3917
-      END> ParseDb
-
-  START> ParseDb
-COMMAND> select
-   FILE> vac_db-pass.tsv
- FIELDS> locus
- VALUES> IGK,IGL,TRA,TRG
-  REGEX> False
-
-PROGRESS> 05:39:17 |                    |   0% (    0) 0.0 minPROGRESS> 05:39:17 |#                   |   5% (  357) 0.0 minPROGRESS> 05:39:17 |##                  |  10% (  714) 0.0 minPROGRESS> 05:39:17 |###                 |  15% (1,071) 0.0 minPROGRESS> 05:39:17 |####                |  20% (1,428) 0.0 minPROGRESS> 05:39:17 |#####               |  25% (1,785) 0.0 minPROGRESS> 05:39:17 |######              |  30% (2,142) 0.0 minPROGRESS> 05:39:17 |#######             |  35% (2,499) 0.0 minPROGRESS> 05:39:17 |########            |  40% (2,856) 0.0 minPROGRESS> 05:39:17 |#########           |  45% (3,213) 0.0 minPROGRESS> 05:39:17 |##########          |  50% (3,570) 0.0 minPROGRESS> 05:39:17 |###########         |  55% (3,927) 0.0 minPROGRESS> 05:39:17 |############        |  60% (4,284) 0.0 minPROGRESS> 05:39:17 |#############       |  65% (4,641) 0.0 minPROGRESS> 05:39:17 |##############      |  70% (4,998) 0.0 minPROGRESS> 05:39:17 |###############     |  75% (5,355) 0.0 minPROGRESS> 05:39:17 |################    |  80% (5,712) 0.0 minPROGRESS> 05:39:17 |#################   |  85% (6,069) 0.0 minPROGRESS> 05:39:17 |##################  |  90% (6,426) 0.0 minPROGRESS> 05:39:17 |################### |  95% (6,783) 0.0 minPROGRESS> 05:39:17 |####################| 100% (7,138) 0.0 min
-
-   OUTPUT> vac_light.tsv
-  RECORDS> 7138
- SELECTED> 3917
-DISCARDED> 3221
-      END> ParseDb
-
-    START> ParseDb
-  COMMAND> split
-     FILE> vac_heavy.tsv
-    FIELD> productive
-NUM_SPLIT> None
-
-PROGRESS> 05:39:18 |                    |   0% (    0) 0.0 minPROGRESS> 05:39:18 |#                   |   5% (  162) 0.0 minPROGRESS> 05:39:18 |##                  |  10% (  324) 0.0 minPROGRESS> 05:39:18 |###                 |  15% (  486) 0.0 minPROGRESS> 05:39:18 |####                |  20% (  648) 0.0 minPROGRESS> 05:39:18 |#####               |  25% (  810) 0.0 minPROGRESS> 05:39:18 |######              |  30% (  972) 0.0 minPROGRESS> 05:39:18 |#######             |  35% (1,134) 0.0 minPROGRESS> 05:39:18 |########            |  40% (1,296) 0.0 minPROGRESS> 05:39:18 |#########           |  45% (1,458) 0.0 minPROGRESS> 05:39:18 |##########          |  50% (1,620) 0.0 minPROGRESS> 05:39:18 |###########         |  55% (1,782) 0.0 minPROGRESS> 05:39:18 |############        |  60% (1,944) 0.0 minPROGRESS> 05:39:18 |#############       |  65% (2,106) 0.0 minPROGRESS> 05:39:18 |##############      |  70% (2,268) 0.0 minPROGRESS> 05:39:18 |###############     |  75% (2,430) 0.0 minPROGRESS> 05:39:18 |################    |  80% (2,592) 0.0 minPROGRESS> 05:39:18 |#################   |  86% (2,754) 0.0 minPROGRESS> 05:39:18 |##################  |  91% (2,916) 0.0 minPROGRESS> 05:39:18 |################### |  96% (3,078) 0.0 minPROGRESS> 05:39:18 |####################| 100% (3,221) 0.0 min
-
-OUTPUT1> vac_heavy_productive-T.tsv
-RECORDS> 3221
-  PARTS> 1
-    END> ParseDb
-
-    START> ParseDb
-  COMMAND> split
-     FILE> vac_light.tsv
-    FIELD> productive
-NUM_SPLIT> None
-
-PROGRESS> 05:39:18 |                    |   0% (    0) 0.0 minPROGRESS> 05:39:18 |#                   |   5% (  196) 0.0 minPROGRESS> 05:39:18 |##                  |  10% (  392) 0.0 minPROGRESS> 05:39:18 |###                 |  15% (  588) 0.0 minPROGRESS> 05:39:18 |####                |  20% (  784) 0.0 minPROGRESS> 05:39:18 |#####               |  25% (  980) 0.0 minPROGRESS> 05:39:18 |######              |  30% (1,176) 0.0 minPROGRESS> 05:39:18 |#######             |  35% (1,372) 0.0 minPROGRESS> 05:39:18 |########            |  40% (1,568) 0.0 minPROGRESS> 05:39:18 |#########           |  45% (1,764) 0.0 minPROGRESS> 05:39:19 |##########          |  50% (1,960) 0.0 minPROGRESS> 05:39:19 |###########         |  55% (2,156) 0.0 minPROGRESS> 05:39:19 |############        |  60% (2,352) 0.0 minPROGRESS> 05:39:19 |#############       |  65% (2,548) 0.0 minPROGRESS> 05:39:19 |##############      |  70% (2,744) 0.0 minPROGRESS> 05:39:19 |###############     |  75% (2,940) 0.0 minPROGRESS> 05:39:19 |################    |  80% (3,136) 0.0 minPROGRESS> 05:39:19 |#################   |  85% (3,332) 0.0 minPROGRESS> 05:39:19 |##################  |  90% (3,528) 0.0 minPROGRESS> 05:39:19 |################### |  95% (3,724) 0.0 minPROGRESS> 05:39:19 |####################| 100% (3,917) 0.0 min
-
-OUTPUT1> vac_light_productive-T.tsv
-RECORDS> 3917
-  PARTS> 1
-    END> ParseDb
-
-       START> DefineClones
-        FILE> vac_heavy_productive-T.tsv
-   SEQ_FIELD> junction
-     V_FIELD> v_call
-     J_FIELD> j_call
- MAX_MISSING> 0
-GROUP_FIELDS> None
-      ACTION> set
-        MODE> gene
-    DISTANCE> 0.1
-     LINKAGE> single
-       MODEL> ham
-        NORM> len
-         SYM> avg
-       NPROC> 16
-
-PROGRESS> [Grouping sequences] 05:40:14 (0) 0.0 minPROGRESS> [Grouping sequences] 05:40:14 (1000) 0.0 minPROGRESS> [Grouping sequences] 05:40:15 (2000) 0.0 minPROGRESS> [Grouping sequences] 05:40:15 (3000) 0.0 minPROGRESS> [Grouping sequences] 05:40:15 (3221) 0.0 min
-
-PROGRESS> [Assigning clones] 05:40:15 |                    |   0% (    0) 0.0 minPROGRESS> [Assigning clones] 05:40:15 |#                   |   5% (  162) 0.0 minPROGRESS> [Assigning clones] 05:40:15 |##                  |  10% (  324) 0.0 minPROGRESS> [Assigning clones] 05:40:15 |###                 |  15% (  486) 0.0 minPROGRESS> [Assigning clones] 05:40:15 |####                |  20% (  648) 0.0 minPROGRESS> [Assigning clones] 05:40:16 |#######             |  35% (1,134) 0.0 minPROGRESS> [Assigning clones] 05:40:16 |############        |  60% (1,944) 0.0 minPROGRESS> [Assigning clones] 05:40:16 |###############     |  75% (2,430) 0.0 minPROGRESS> [Assigning clones] 05:40:16 |################    |  80% (2,592) 0.0 minPROGRESS> [Assigning clones] 05:40:16 |#################   |  86% (2,754) 0.0 minPROGRESS> [Assigning clones] 05:40:16 |##################  |  91% (2,916) 0.0 minPROGRESS> [Assigning clones] 05:40:16 |################### |  96% (3,078) 0.0 minPROGRESS> [Assigning clones] 05:40:17 |####################| 100% (3,221) 0.0 min
-
- OUTPUT> vac_heavy_clone-pass.tsv
- CLONES> 3151
-RECORDS> 3221
-   PASS> 3221
-   FAIL> 0
-    END> DefineClones
-
-      START> CreateGermlines
-       FILE> vac_heavy_clone-light.tsv
- GERM_TYPES> full,dmask
-  SEQ_FIELD> sequence_alignment
-    V_FIELD> v_call
-    D_FIELD> d_call
-    J_FIELD> j_call
-     CLONED> True
-CLONE_FIELD> clone_id
-
-PROGRESS> 05:40:35 |Sorting by clone    | 0.0 minPROGRESS> 05:40:36 |Done                | 0.0 min
-
-PROGRESS> 05:40:36 |                    |   0% (    0) 0.0 minPROGRESS> 05:40:36 |#                   |   5% (  154) 0.0 minPROGRESS> 05:40:36 |##                  |  10% (  308) 0.0 minPROGRESS> 05:40:36 |###                 |  15% (  462) 0.0 minPROGRESS> 05:40:36 |####                |  20% (  616) 0.0 minPROGRESS> 05:40:36 |#####               |  25% (  770) 0.0 minPROGRESS> 05:40:36 |######              |  30% (  924) 0.0 minPROGRESS> 05:40:36 |#######             |  35% (1,078) 0.0 minPROGRESS> 05:40:36 |########            |  40% (1,232) 0.0 minPROGRESS> 05:40:36 |#########           |  45% (1,386) 0.0 minPROGRESS> 05:40:36 |##########          |  50% (1,540) 0.0 minPROGRESS> 05:40:37 |###########         |  55% (1,694) 0.0 minPROGRESS> 05:40:37 |############        |  60% (1,848) 0.0 minPROGRESS> 05:40:37 |#############       |  65% (2,002) 0.0 minPROGRESS> 05:40:37 |##############      |  70% (2,156) 0.0 minPROGRESS> 05:40:37 |###############     |  75% (2,310) 0.0 minPROGRESS> 05:40:37 |################    |  80% (2,464) 0.0 minPROGRESS> 05:40:37 |#################   |  86% (2,618) 0.0 minPROGRESS> 05:40:37 |##################  |  91% (2,772) 0.0 minPROGRESS> 05:40:37 |################### |  96% (2,926) 0.0 minPROGRESS> 05:40:37 |####################| 100% (3,061) 0.0 min
-
- OUTPUT> vac_heavy_germ-pass.tsv
-RECORDS> 3061
-   PASS> 3060
-   FAIL> 1
-    END> CreateGermlines
-
