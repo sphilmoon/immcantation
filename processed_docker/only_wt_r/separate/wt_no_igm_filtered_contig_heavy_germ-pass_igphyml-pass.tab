@@ -1,0 +1,3 @@
+CLONE	NSEQ	NSITE	TREE_LENGTH	LHOOD	KAPPA_MLE	OMEGA_FWR_MLE	OMEGA_CDR_MLE	WRC_2_MLE	GYW_0_MLE	WA_1_MLE	TW_0_MLE	SYC_2_MLE	GRS_0_MLE	TREE
+REPERTOIRE	2	119.0000	0.3820	-203.4450	3.5092	0.2228	0.6809	2.9344	5.0737	2.3158	0.5362	-0.9900	-0.9900	`igphyml --repfile ../wt_no_igm_filtered_contig_heavy_germ-pass_lineages_gy.tsv -m HLP --run_id hlp --threads 16 -o lr --omega e,e -t e --motifs WRC_2:0,GYW_0:1,WA_1:2,TW_0:3,SYC_2:4,GRS_0:5 --hotness e,e,e,e,e,e --oformat tab --outname ../wt_no_igm_filtered_contig_heavy_germ-pass_igphyml-pass.tab --ASRc 0.9 `
+951_448	2	119	0.3820	-203.4450	3.5092	0.2228	0.6809	2.9344	5.0737	2.3158	0.5362	-0.9900	-0.9900	((TGCCCATGTTGGAGGT-1_contig_1:0.1353576644,ACTGAACAGGACAGAA-1_contig_1:0.1815714410)0_2:0.0650403126,951_448_GERM:0.0000100000);
